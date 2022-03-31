@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+	  <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.13" />
+	  <PackageReference Include="Microsoft.EntityFrameworkcore.Design" Version="5.0.10">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	  </PackageReference>
+	  
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Logs\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TestEducationUow.Data\TestEducationUow.Data.csproj" />
+    <ProjectReference Include="..\TestEducationUow.Domain\TestEducationUow.Domain.csproj" />
+    <ProjectReference Include="..\TestEducationUow.Service\TestEducationUow.Service.csproj" />
+  </ItemGroup>
+
+</Project>
