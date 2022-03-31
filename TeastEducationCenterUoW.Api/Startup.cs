@@ -13,6 +13,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TestEducationCenterUoW.Data.Contexts;
+using TestEducationCenterUoW.Data.IRepositories;
+using TestEducationCenterUoW.Data.Repositories;
+using TestEducationCenterUoW.Service.Interfaces;
+using TestEducationCenterUoW.Service.Services;
 
 namespace TeastEducationCenterUoW.Api
 {
@@ -40,8 +44,12 @@ namespace TeastEducationCenterUoW.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TeastEducationCenterUoW.Api", Version = "v1" });
             });
-
+            
             services.AddHttpContextAccessor();
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IStudentService, StudentService>();
+
 
         }
 
