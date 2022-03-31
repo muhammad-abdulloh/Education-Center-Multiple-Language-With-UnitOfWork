@@ -3,6 +3,7 @@ using TestEducationCenterUoW.Domain.Entities.Groups;
 using TestEducationCenterUoW.Domain.Entities.Students;
 using TestEducationCenterUoW.Domain.Entities.Teachers;
 using Microsoft.EntityFrameworkCore;
+using TestEducationUow.Domain.Entities.Departments;
 
 namespace TestEducationCenterUoW.Data.Contexts
 {
@@ -17,5 +18,6 @@ namespace TestEducationCenterUoW.Data.Contexts
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<Course> Courses { get; set; }
         public virtual DbSet<Group> Groups { get; set; }
+        public virtual DbSet<Employee> Employees { get; set; }
     }
 }

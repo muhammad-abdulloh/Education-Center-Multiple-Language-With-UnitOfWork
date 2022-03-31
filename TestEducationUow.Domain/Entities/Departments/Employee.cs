@@ -9,7 +9,7 @@ using TestEducationCenterUoW.Domain.Enums;
 
 namespace TestEducationUow.Domain.Entities.Departments
 {
-    public class Employees : IAuditable
+    public class Employee : IAuditable
     {
         public Guid Id { get; set; }
         public string FirstName { get; set; }
