@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +16,7 @@ using System.Threading.Tasks;
 using TestEducationCenterUoW.Data.Contexts;
 using TestEducationCenterUoW.Data.IRepositories;
 using TestEducationCenterUoW.Data.Repositories;
+using TestEducationCenterUoW.Service.Helpers;
 using TestEducationCenterUoW.Service.Interfaces;
 using TestEducationCenterUoW.Service.Services;
 
@@ -62,6 +64,12 @@ namespace TeastEducationCenterUoW.Api
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TeastEducationCenterUoW.Api v1"));
             }
+
+            if (app.ApplicationServices.GetService<IHttpContextAccessor>() != null)
+            {
+                HttpContextHelper.Accessor = app.ApplicationServices.GetRequiredService<IHttpContextAccessor>();
+            }
+
 
             app.UseHttpsRedirection();
 

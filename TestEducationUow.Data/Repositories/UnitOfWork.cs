@@ -29,7 +29,7 @@ namespace TestEducationCenterUoW.Data.Repositories
             this.logger = new LoggerConfiguration()
                 .WriteTo.File
                 (
-                    path: "Logs/logs.txt",
+                    path: "Logs/log.txt",
                     outputTemplate: config.GetSection("Serilog:OutputTemplate").Value,
                     rollingInterval: RollingInterval.Day,
                     restrictedToMinimumLevel: LogEventLevel.Information
