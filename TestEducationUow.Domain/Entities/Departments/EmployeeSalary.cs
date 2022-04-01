@@ -1,6 +1,6 @@
-﻿using TestEducationCenterUoW.Domain.Commons;
+﻿using System;
+using TestEducationCenterUoW.Domain.Commons;
 using TestEducationCenterUoW.Domain.Enums;
-using System;
 
 namespace TestEducationCenterUoW.Domain.Entities.Departments
 {

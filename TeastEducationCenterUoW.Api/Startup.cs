@@ -1,18 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using TestEducationCenterUoW.Data.Contexts;
 using TestEducationCenterUoW.Data.IRepositories;
 using TestEducationCenterUoW.Data.Repositories;
@@ -46,7 +39,7 @@ namespace TeastEducationCenterUoW.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TeastEducationCenterUoW.Api", Version = "v1" });
             });
-            
+
             services.AddHttpContextAccessor();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();

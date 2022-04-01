@@ -1,8 +1,8 @@
-﻿using TestEducationCenterUoW.Domain.Configurations;
-using TestEducationCenterUoW.Service.Helpers;
+﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
+using TestEducationCenterUoW.Domain.Configurations;
+using TestEducationCenterUoW.Service.Helpers;
 
 namespace TestEducationCenterUoW.Service.Extensions
 {

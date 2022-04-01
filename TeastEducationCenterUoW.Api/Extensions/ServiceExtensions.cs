@@ -1,8 +1,8 @@
-﻿using TestEducationCenterUoW.Data.IRepositories;
+﻿using Microsoft.Extensions.DependencyInjection;
+using TestEducationCenterUoW.Data.IRepositories;
 using TestEducationCenterUoW.Data.Repositories;
 using TestEducationCenterUoW.Service.Interfaces;
 using TestEducationCenterUoW.Service.Services;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace TestEducationCenterUoW.Api.Extensions
 {

@@ -1,11 +1,11 @@
-﻿using TestEducationCenterUoW.Domain.Commons;
-using TestEducationCenterUoW.Domain.Configurations;
-using TestEducationCenterUoW.Domain.Entities.Students;
-using TestEducationCenterUoW.Service.DTOs.Students;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using TestEducationCenterUoW.Domain.Commons;
+using TestEducationCenterUoW.Domain.Configurations;
+using TestEducationCenterUoW.Domain.Entities.Students;
+using TestEducationCenterUoW.Service.DTOs.Students;
 
 namespace TestEducationCenterUoW.Service.Interfaces
 {

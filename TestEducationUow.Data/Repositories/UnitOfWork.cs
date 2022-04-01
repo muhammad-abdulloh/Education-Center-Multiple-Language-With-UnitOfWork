@@ -1,11 +1,10 @@
-﻿using TestEducationCenterUoW.Data.Contexts;
-using TestEducationCenterUoW.Data.IRepositories;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Serilog;
-using Serilog.Core;
 using Serilog.Events;
 using System;
 using System.Threading.Tasks;
+using TestEducationCenterUoW.Data.Contexts;
+using TestEducationCenterUoW.Data.IRepositories;
 
 namespace TestEducationCenterUoW.Data.Repositories
 {

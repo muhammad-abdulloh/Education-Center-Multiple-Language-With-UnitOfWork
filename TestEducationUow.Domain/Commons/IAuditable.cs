@@ -1,5 +1,5 @@
-﻿using TestEducationCenterUoW.Domain.Enums;
-using System;
+﻿using System;
+using TestEducationCenterUoW.Domain.Enums;
 
 namespace TestEducationCenterUoW.Domain.Commons
 {

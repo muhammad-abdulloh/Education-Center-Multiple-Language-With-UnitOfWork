@@ -1,11 +1,11 @@
-﻿using TestEducationCenterUoW.Data.Contexts;
-using TestEducationCenterUoW.Data.IRepositories;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Serilog;
 using System;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using TestEducationCenterUoW.Data.Contexts;
+using TestEducationCenterUoW.Data.IRepositories;
 
 namespace TestEducationCenterUoW.Data.Repositories
 {

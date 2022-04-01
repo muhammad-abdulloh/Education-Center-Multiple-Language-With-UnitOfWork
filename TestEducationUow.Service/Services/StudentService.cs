@@ -1,14 +1,14 @@
-﻿using TestEducationCenterUoW.Data.IRepositories;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
+using TestEducationCenterUoW.Data.IRepositories;
 using TestEducationCenterUoW.Domain.Commons;
 using TestEducationCenterUoW.Domain.Configurations;
 using TestEducationCenterUoW.Domain.Entities.Students;
 using TestEducationCenterUoW.Service.DTOs.Students;
 using TestEducationCenterUoW.Service.Extensions;
 using TestEducationCenterUoW.Service.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
 
 namespace TestEducationCenterUoW.Service.Services
 {

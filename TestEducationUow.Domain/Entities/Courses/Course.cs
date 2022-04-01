@@ -1,10 +1,10 @@
-﻿using TestEducationCenterUoW.Domain.Commons;
-using TestEducationCenterUoW.Domain.Enums;
-using TestEducationCenterUoW.Domain.Localization;
+﻿//using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
-//using System.Text.Json.Serialization;
-using Newtonsoft.Json;
+using TestEducationCenterUoW.Domain.Commons;
+using TestEducationCenterUoW.Domain.Enums;
+using TestEducationCenterUoW.Domain.Localization;
 
 namespace TestEducationCenterUoW.Domain.Entities.Courses
 {

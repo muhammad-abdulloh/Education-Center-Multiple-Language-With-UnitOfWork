@@ -1,13 +1,13 @@
-﻿using TestEducationCenterUoW.Domain.Commons;
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using TestEducationCenterUoW.Domain.Commons;
 using TestEducationCenterUoW.Domain.Entities.Courses;
 using TestEducationCenterUoW.Domain.Entities.Students;
 using TestEducationCenterUoW.Domain.Entities.Teachers;
 using TestEducationCenterUoW.Domain.Enums;
 using TestEducationCenterUoW.Domain.Localization;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using Newtonsoft.Json;
 
 
 namespace TestEducationCenterUoW.Domain.Entities.Groups
@@ -31,12 +31,12 @@ namespace TestEducationCenterUoW.Domain.Entities.Groups
         [NotMapped]
         public string Name { get; set; }
 
-        public Guid TeacherId { get; set; }
+        public Guid? TeacherId { get; set; }
 
         [ForeignKey(nameof(TeacherId))]
         public Teacher Teacher { get; set; }
 
-        public Guid CourseId { get; set; }
+        public Guid? CourseId { get; set; }
 
         [ForeignKey(nameof(CourseId))]
         public Course Course { get; set; }

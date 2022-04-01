@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TestEducationCenterUoW.Domain.Commons;
 using TestEducationCenterUoW.Domain.Entities.Departments;
 using TestEducationCenterUoW.Domain.Enums;

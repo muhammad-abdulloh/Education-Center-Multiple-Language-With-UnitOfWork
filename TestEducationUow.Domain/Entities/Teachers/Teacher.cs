@@ -1,8 +1,8 @@
-﻿using TestEducationCenterUoW.Domain.Commons;
+﻿using System;
+using System.Collections.Generic;
+using TestEducationCenterUoW.Domain.Commons;
 using TestEducationCenterUoW.Domain.Entities.Courses;
 using TestEducationCenterUoW.Domain.Enums;
-using System;
-using System.Collections.Generic;
 
 namespace TestEducationCenterUoW.Domain.Entities.Teachers
 {
@@ -11,6 +11,8 @@ namespace TestEducationCenterUoW.Domain.Entities.Teachers
         public Guid Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string Email { get; set; }
+        public string PhoneNumber { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public Guid? UpdatedBy { get; set; }
