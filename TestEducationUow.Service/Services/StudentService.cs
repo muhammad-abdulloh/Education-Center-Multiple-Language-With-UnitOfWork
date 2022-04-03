@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FsCheck;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -98,9 +99,14 @@ namespace TestEducationCenterUoW.Service.Services
 
             var response = new BaseResponse<IEnumerable<Student>>();
 
-            var students = await unitOfWork.Students.GetAllAsync(expression);
+            var students = await unitOfWork.Students.GetAllAsync(expression => expression.State != ItemState.Deleted);
 
             response.Data = students.ToPagedList(@params);
+
+            if (response.Data is null)
+            {
+                response.Error = new ErrorResponse(404, "Users not found");
+            }
 
             return response;
         }
@@ -157,6 +163,8 @@ namespace TestEducationCenterUoW.Service.Services
             student.LastName = studentDto.LastName;
             student.Phone = studentDto.Phone;
             student.GroupId = studentDto.GroupId;
+            string imagePath = await SaveFileAsync(studentDto.Image.OpenReadStream(), studentDto.Image.FileName);
+            student.Image = "https://localhost:5001/Images/" + imagePath;
             student.Update();
 
             var result = await unitOfWork.Students.UpdateAsync(student);

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using TestEducationCenterUoW.Domain.Entities.Students;
 using TestEducationCenterUoW.Domain.Enums;
 using TestEducationCenterUoW.Service.DTOs.Students;
 using TestEducationCenterUoW.Service.Interfaces;
+using TestEducationUow.Service.ImageManager;
 
 namespace TeastEducationCenterUoW.Api.Controllers
 {
@@ -26,11 +28,12 @@ namespace TeastEducationCenterUoW.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<BaseResponse<Student>>> Create([FromForm]StudentForCreationDto studentDto)
+        public async Task<ActionResult<BaseResponse<Student>>> Create([FromForm] StudentForCreationDto studentDto)
         {
             var result = await studentService.CreateAsync(studentDto);
 
             return StatusCode(result.Code ?? result.Error.Code.Value, result);
+
         }
 
         [HttpGet]
@@ -44,13 +47,13 @@ namespace TeastEducationCenterUoW.Api.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<BaseResponse<Student>>> Get([FromRoute]Guid id)
         {
-            var result = await studentService.GetAsync(p => p.Id == id);
+            var result = await studentService.GetAsync(p => p.Id == id && p.State != ItemState.Deleted);
 
             return StatusCode(result.Code ?? result.Error.Code.Value, result);
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<BaseResponse<Student>>> Update(Guid id, StudentForCreationDto studentDto)
+        public async Task<ActionResult<BaseResponse<Student>>> Update(Guid id, [FromForm]StudentForCreationDto studentDto)
         {
             var result = await studentService.UpdateAsync(id, studentDto);
 
@@ -64,5 +67,6 @@ namespace TeastEducationCenterUoW.Api.Controllers
 
             return StatusCode(result.Code ?? result.Error.Code.Value, result);
         }
+
     }
 }
