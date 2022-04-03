@@ -15,13 +15,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Logs\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\TestEducationUow.Data\TestEducationUow.Data.csproj" />
     <ProjectReference Include="..\TestEducationUow.Domain\TestEducationUow.Domain.csproj" />
     <ProjectReference Include="..\TestEducationUow.Service\TestEducationUow.Service.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\Images\" />
   </ItemGroup>
 
 </Project>

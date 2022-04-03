@@ -1,24 +1,34 @@
-﻿using System;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using TestEducationCenterUoW.Data.IRepositories;
 using TestEducationCenterUoW.Domain.Commons;
 using TestEducationCenterUoW.Domain.Configurations;
 using TestEducationCenterUoW.Domain.Entities.Students;
+using TestEducationCenterUoW.Domain.Enums;
 using TestEducationCenterUoW.Service.DTOs.Students;
 using TestEducationCenterUoW.Service.Extensions;
 using TestEducationCenterUoW.Service.Interfaces;
-
 namespace TestEducationCenterUoW.Service.Services
 {
     public class StudentService : IStudentService
     {
         private readonly IUnitOfWork unitOfWork;
+        private readonly IMapper mapper;
+        private readonly IWebHostEnvironment env;
+        private readonly IConfiguration config;
 
-        public StudentService(IUnitOfWork unitOfWork)
+        public StudentService(IUnitOfWork unitOfWork, IMapper mapper, IWebHostEnvironment env, IConfiguration config)
         {
             this.unitOfWork = unitOfWork;
+            this.mapper = mapper;
+            this.env = env;
+            this.config = config;
         }
 
         public async Task<BaseResponse<Student>> CreateAsync(StudentForCreationDto studentDto)
@@ -42,15 +52,14 @@ namespace TestEducationCenterUoW.Service.Services
             }
 
             // create after checking success
-            var mappedStudent = new Student
-            {
-                FirstName = studentDto.FirstName,
-                LastName = studentDto.LastName,
-                Phone = studentDto.Phone,
-                GroupId = studentDto.GroupId
-            };
+            var mappedStudent = mapper.Map<Student>(studentDto);
+
+            // save image from dto model to wwwroot
+            mappedStudent.Image = await SaveFileAsync(studentDto.Image.OpenReadStream(), studentDto.Image.FileName);
 
             var result = await unitOfWork.Students.CreateAsync(mappedStudent);
+
+            result.Image = "https://localhost:5001/Images/" + result.Image;
 
             await unitOfWork.SaveChangesAsync();
 
@@ -70,6 +79,7 @@ namespace TestEducationCenterUoW.Service.Services
                 response.Error = new ErrorResponse(404, "User not found");
                 return response;
             }
+            existStudent.Delete();
 
             var result = await unitOfWork.Students.UpdateAsync(existStudent);
 
@@ -111,12 +121,24 @@ namespace TestEducationCenterUoW.Service.Services
             return response;
         }
 
+        public async Task<string> SaveFileAsync(Stream file, string fileName)
+        {
+            fileName = Guid.NewGuid().ToString("N") + "_" + fileName;
+            string storagePath = config.GetSection("Storage:ImageUrl").Value;
+            string filePath = Path.Combine(env.WebRootPath, $"{storagePath}/{fileName}");
+            FileStream mainFile = File.Create(filePath);
+            await file.CopyToAsync(mainFile);
+            mainFile.Close();
+
+            return fileName;
+        }
+
         public async Task<BaseResponse<Student>> UpdateAsync(Guid id, StudentForCreationDto studentDto)
         {
             var response = new BaseResponse<Student>();
 
             // check for exist student
-            var student = await unitOfWork.Students.GetAsync(p => p.Id == id);
+            var student = await unitOfWork.Students.GetAsync(p => p.Id == id && p.State != ItemState.Deleted);
             if (student is null)
             {
                 response.Error = new ErrorResponse(404, "User not found");
@@ -131,16 +153,13 @@ namespace TestEducationCenterUoW.Service.Services
                 return response;
             }
 
-            var mappedStudent = new Student
-            {
-                FirstName = student.FirstName,
-                LastName = student.LastName,
-                Phone = student.Phone,
-                GroupId = student.GroupId
-            };
-            mappedStudent.Update();
+            student.FirstName = studentDto.FirstName;
+            student.LastName = studentDto.LastName;
+            student.Phone = studentDto.Phone;
+            student.GroupId = studentDto.GroupId;
+            student.Update();
 
-            var result = await unitOfWork.Students.UpdateAsync(mappedStudent);
+            var result = await unitOfWork.Students.UpdateAsync(student);
 
             await unitOfWork.SaveChangesAsync();
 

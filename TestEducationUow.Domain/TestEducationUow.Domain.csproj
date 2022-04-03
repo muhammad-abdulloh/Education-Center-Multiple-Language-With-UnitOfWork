@@ -13,4 +13,9 @@
 	<ItemGroup>
 	  <Folder Include="Attributes\" />
 	</ItemGroup>
+
+
+	<ItemGroup>
+	  <ProjectReference Include="..\TestEducationCenterUoW.WievModels\TestEducationCenterUoW.WievModels.csproj" />
+	</ItemGroup>
 </Project>

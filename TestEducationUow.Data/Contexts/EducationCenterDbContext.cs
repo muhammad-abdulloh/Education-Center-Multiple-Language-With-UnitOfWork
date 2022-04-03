@@ -20,6 +20,6 @@ namespace TestEducationCenterUoW.Data.Contexts
         public virtual DbSet<Course> Courses { get; set; }
         public virtual DbSet<Group> Groups { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
-        public virtual DbSet<EmployeeSalary> EmployeeSalaries {get; set;}
+        public virtual DbSet<EmployeeSalary> EmployeeSalaries { get; set; }
     }
 }

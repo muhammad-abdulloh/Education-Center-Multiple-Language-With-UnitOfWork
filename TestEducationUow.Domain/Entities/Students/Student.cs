@@ -1,6 +1,7 @@
 ﻿using System;
 using TestEducationCenterUoW.Domain.Commons;
 using TestEducationCenterUoW.Domain.Enums;
+using TestEducationCenterUoW.WievModels.Students;
 
 namespace TestEducationCenterUoW.Domain.Entities.Students
 {
@@ -15,6 +16,8 @@ namespace TestEducationCenterUoW.Domain.Entities.Students
         public DateTime? UpdatedAt { get; set; }
         public Guid? UpdatedBy { get; set; }
         public ItemState State { get; set; }
+        public string Image { get; set; }
+
 
         public void Update()
         {
@@ -32,5 +35,19 @@ namespace TestEducationCenterUoW.Domain.Entities.Students
         {
             State = ItemState.Deleted;
         }
+
+
+        public static explicit operator Student(StudentForCreationDto v)
+        {
+            return new Student()
+            {
+                FirstName = v.FirstName,
+                LastName = v.LastName,
+                Phone = v.Phone,
+                GroupId = v.GroupId
+            };
+        }
+
+
     }
 }

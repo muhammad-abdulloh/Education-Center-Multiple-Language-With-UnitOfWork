@@ -1,5 +1,4 @@
-﻿//using System.Text.Json.Serialization;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using TestEducationCenterUoW.Domain.Commons;

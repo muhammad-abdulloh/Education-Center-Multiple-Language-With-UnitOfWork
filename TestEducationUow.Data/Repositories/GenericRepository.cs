@@ -15,6 +15,7 @@ namespace TestEducationCenterUoW.Data.Repositories
         internal EducationCenterDbContext dbContext;
         internal DbSet<T> dbSet;
         private readonly ILogger logger;
+
         public GenericRepository(EducationCenterDbContext dbContext, ILogger logger)
         {
             this.dbContext = dbContext;
@@ -32,7 +33,7 @@ namespace TestEducationCenterUoW.Data.Repositories
             }
             catch (Exception ex)
             {
-                logger.Error(ex.Message);
+                Log.Error("Error creating entity {0}", ex.Message);
                 throw;
             }
         }
@@ -52,14 +53,23 @@ namespace TestEducationCenterUoW.Data.Repositories
             }
             catch (Exception ex)
             {
-                logger.Error(ex.Message);
+                Log.Error("Error in DeleteAsync: {0}", ex.Message);
                 throw;
             }
         }
 
         public async Task<IQueryable<T>> GetAllAsync(Expression<Func<T, bool>> expression = null)
         {
-            return expression is null ? dbSet : dbSet.Where(expression);
+
+            try
+            {
+                return expression is null ? dbSet : dbSet.Where(expression);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error in Getall: {0}", ex.Message);
+                throw;
+            }
         }
 
         public async Task<T> GetAsync(Expression<Func<T, bool>> expression)
@@ -71,7 +81,7 @@ namespace TestEducationCenterUoW.Data.Repositories
             }
             catch (Exception ex)
             {
-                logger.Error(ex.Message);
+                Log.Error("Error in GetAsync: {0}", ex.Message);
                 throw;
             }
         }
@@ -86,7 +96,7 @@ namespace TestEducationCenterUoW.Data.Repositories
             }
             catch (Exception ex)
             {
-                logger.Error(ex.Message);
+                Log.Error("Error in UpdateAsync: {0}", ex.Message);
                 throw;
             }
         }

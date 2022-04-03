@@ -6,12 +6,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using TestEducationCenterUoW.Api.Extensions;
 using TestEducationCenterUoW.Data.Contexts;
 using TestEducationCenterUoW.Data.IRepositories;
 using TestEducationCenterUoW.Data.Repositories;
 using TestEducationCenterUoW.Service.Helpers;
 using TestEducationCenterUoW.Service.Interfaces;
 using TestEducationCenterUoW.Service.Services;
+using TestEducationUow.Service.Mapping;
 
 namespace TeastEducationCenterUoW.Api
 {
@@ -42,8 +44,11 @@ namespace TeastEducationCenterUoW.Api
 
             services.AddHttpContextAccessor();
 
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<IStudentService, StudentService>();
+            //Mapper servces
+            services.AddAutoMapper(typeof(MappingProfile));
+
+            //custom services
+            services.AddCustomServices();
 
 
         }
@@ -66,6 +71,8 @@ namespace TeastEducationCenterUoW.Api
 
             app.UseHttpsRedirection();
 
+            app.UseStaticFiles();
+            
             app.UseRouting();
 
             app.UseAuthorization();

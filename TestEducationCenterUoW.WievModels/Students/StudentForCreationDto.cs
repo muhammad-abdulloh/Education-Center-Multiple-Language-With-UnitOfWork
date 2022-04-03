@@ -1,8 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace TestEducationCenterUoW.Service.DTOs.Students
+namespace TestEducationCenterUoW.WievModels.Students
 {
     public class StudentForCreationDto
     {
@@ -17,8 +16,5 @@ namespace TestEducationCenterUoW.Service.DTOs.Students
 
         [Required]
         public Guid GroupId { get; set; }
-
-        public IFormFile Image { get; set; }
-
     }
 }

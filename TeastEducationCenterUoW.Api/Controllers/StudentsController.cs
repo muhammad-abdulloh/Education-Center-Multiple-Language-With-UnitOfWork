@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TestEducationCenterUoW.Domain.Commons;
 using TestEducationCenterUoW.Domain.Configurations;
 using TestEducationCenterUoW.Domain.Entities.Students;
+using TestEducationCenterUoW.Domain.Enums;
 using TestEducationCenterUoW.Service.DTOs.Students;
 using TestEducationCenterUoW.Service.Interfaces;
 
@@ -15,13 +17,16 @@ namespace TeastEducationCenterUoW.Api.Controllers
     public class StudentsController : ControllerBase
     {
         private readonly IStudentService studentService;
-        public StudentsController(IStudentService studentService)
+        private readonly IWebHostEnvironment env;
+
+        public StudentsController(IStudentService studentService, IWebHostEnvironment env)
         {
             this.studentService = studentService;
+            this.env = env;
         }
 
         [HttpPost]
-        public async Task<ActionResult<BaseResponse<Student>>> Create(StudentForCreationDto studentDto)
+        public async Task<ActionResult<BaseResponse<Student>>> Create([FromForm]StudentForCreationDto studentDto)
         {
             var result = await studentService.CreateAsync(studentDto);
 
@@ -37,7 +42,7 @@ namespace TeastEducationCenterUoW.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<BaseResponse<Student>>> Get(Guid id)
+        public async Task<ActionResult<BaseResponse<Student>>> Get([FromRoute]Guid id)
         {
             var result = await studentService.GetAsync(p => p.Id == id);
 
@@ -55,7 +60,7 @@ namespace TeastEducationCenterUoW.Api.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<BaseResponse<bool>>> Delete(Guid id)
         {
-            var result = await studentService.DeleteAsync(p => p.Id == id);
+            var result = await studentService.DeleteAsync(p => p.Id == id && p.State != ItemState.Deleted);
 
             return StatusCode(result.Code ?? result.Error.Code.Value, result);
         }
