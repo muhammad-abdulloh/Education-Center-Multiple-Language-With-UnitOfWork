@@ -13,11 +13,31 @@ namespace TestEducationCenterUoW.Domain.Entities.Teachers
         public string LastName { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
+        public string Image { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public Guid? UpdatedBy { get; set; }
         public ItemState State { get; set; }
 
         public virtual ICollection<Course> Courses { get; set; }
+
+
+        public void Update()
+        {
+            UpdatedAt = DateTime.Now;
+            State = ItemState.Updated;
+        }
+
+        public void Create()
+        {
+            CreatedAt = DateTime.Now;
+            State = ItemState.Created;
+        }
+
+        public void Delete()
+        {
+            State = ItemState.Deleted;
+        }
+
     }
 }

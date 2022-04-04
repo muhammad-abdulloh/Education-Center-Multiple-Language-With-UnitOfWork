@@ -8,11 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using TestEducationCenterUoW.Api.Extensions;
 using TestEducationCenterUoW.Data.Contexts;
-using TestEducationCenterUoW.Data.IRepositories;
-using TestEducationCenterUoW.Data.Repositories;
 using TestEducationCenterUoW.Service.Helpers;
-using TestEducationCenterUoW.Service.Interfaces;
-using TestEducationCenterUoW.Service.Services;
 using TestEducationUow.Service.Mapping;
 
 namespace TeastEducationCenterUoW.Api
@@ -72,7 +68,7 @@ namespace TeastEducationCenterUoW.Api
             app.UseHttpsRedirection();
 
             app.UseStaticFiles();
-            
+
             app.UseRouting();
 
             app.UseAuthorization();

@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using FsCheck;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using System;

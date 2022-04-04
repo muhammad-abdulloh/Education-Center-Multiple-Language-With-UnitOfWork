@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TestEducationCenterUoW.Data.Contexts;
@@ -9,9 +10,10 @@ using TestEducationCenterUoW.Data.Contexts;
 namespace TestEducationUow.Data.Migrations
 {
     [DbContext(typeof(EducationCenterDbContext))]
-    partial class EducationCenterDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220403192706_Test")]
+    partial class Test
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,6 +59,9 @@ namespace TestEducationUow.Data.Migrations
 
                     b.Property<decimal>("Price")
                         .HasColumnType("numeric");
+
+                    b.Property<int>("Star")
+                        .HasColumnType("integer");
 
                     b.Property<int>("StarCount")
                         .HasColumnType("integer");
@@ -212,9 +217,6 @@ namespace TestEducationUow.Data.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("FirstName")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Image")
                         .HasColumnType("text");
 
                     b.Property<string>("LastName")

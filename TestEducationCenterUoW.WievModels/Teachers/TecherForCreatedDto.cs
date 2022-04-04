@@ -1,9 +1,14 @@
 ﻿using Microsoft.AspNetCore.Http;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace TestEducationUow.Service.DTOs.Teachers
+namespace TestEducationCenterUoW.WievModels.Teachers
 {
-    public class TeacherForCreationDto
+    public class TecherForCreatedDto
     {
         [Required]
         public string FirstName { get; set; }
@@ -13,6 +18,7 @@ namespace TestEducationUow.Service.DTOs.Teachers
         public string Email { get; set; }
         [Required]
         public string PhoneNumber { get; set; }
+
         public IFormFile Image { get; set; }
     }
 }

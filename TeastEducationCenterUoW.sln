@@ -11,8 +11,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestEducationUow.Domain", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestEducationUow.Service", "TestEducationUow.Service\TestEducationUow.Service.csproj", "{77ED6505-81BD-41D5-9F4B-51D6368581C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestEducationCenterUoW.WievModels", "TestEducationCenterUoW.WievModels\TestEducationCenterUoW.WievModels.csproj", "{A4D3D462-EE49-4DB1-9668-3F16FF63DFF2}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,10 +33,6 @@ Global
 		{77ED6505-81BD-41D5-9F4B-51D6368581C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77ED6505-81BD-41D5-9F4B-51D6368581C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77ED6505-81BD-41D5-9F4B-51D6368581C5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A4D3D462-EE49-4DB1-9668-3F16FF63DFF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A4D3D462-EE49-4DB1-9668-3F16FF63DFF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A4D3D462-EE49-4DB1-9668-3F16FF63DFF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A4D3D462-EE49-4DB1-9668-3F16FF63DFF2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

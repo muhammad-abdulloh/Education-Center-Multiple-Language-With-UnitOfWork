@@ -1,7 +1,6 @@
 ﻿using System;
 using TestEducationCenterUoW.Domain.Commons;
 using TestEducationCenterUoW.Domain.Enums;
-using TestEducationCenterUoW.WievModels.Students;
 
 namespace TestEducationCenterUoW.Domain.Entities.Students
 {
@@ -34,18 +33,6 @@ namespace TestEducationCenterUoW.Domain.Entities.Students
         public void Delete()
         {
             State = ItemState.Deleted;
-        }
-
-
-        public static explicit operator Student(StudentForCreationDto v)
-        {
-            return new Student()
-            {
-                FirstName = v.FirstName,
-                LastName = v.LastName,
-                Phone = v.Phone,
-                GroupId = v.GroupId
-            };
         }
 
 

@@ -25,12 +25,45 @@ namespace TestEducationCenterUoW.Domain.Entities.Courses
 
         [NotMapped]
         public string Name { get; set; }
-
         public decimal Price { get; set; }
         public ushort Duration { get; set; }
+
+
+        public string CourseForId { get; set; }
+        public string CourseType { get; set; }
+        public string CourseAuthor { get; set; }
+        public string CourseImageUrl { get; set; }
+        public string CourseDescription { get; set; }
+        public int ViewCount { get; set; }
+
+        [NotMapped]
+        public int Star { get; set; }
+        public int StarCount { get; set; }
+
+
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public Guid? UpdatedBy { get; set; }
         public ItemState State { get; set; }
+
+
+
+        public void Update()
+        {
+            UpdatedAt = DateTime.Now;
+            State = ItemState.Updated;
+        }
+
+        public void Create()
+        {
+            CreatedAt = DateTime.Now;
+            State = ItemState.Created;
+        }
+
+        public void Delete()
+        {
+            State = ItemState.Deleted;
+        }
+
     }
 }

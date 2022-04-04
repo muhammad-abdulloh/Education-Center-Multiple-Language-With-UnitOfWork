@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,7 +9,6 @@ using TestEducationCenterUoW.Domain.Entities.Students;
 using TestEducationCenterUoW.Domain.Enums;
 using TestEducationCenterUoW.Service.DTOs.Students;
 using TestEducationCenterUoW.Service.Interfaces;
-using TestEducationUow.Service.ImageManager;
 
 namespace TeastEducationCenterUoW.Api.Controllers
 {
@@ -45,7 +43,7 @@ namespace TeastEducationCenterUoW.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<BaseResponse<Student>>> Get([FromRoute]Guid id)
+        public async Task<ActionResult<BaseResponse<Student>>> Get([FromRoute] Guid id)
         {
             var result = await studentService.GetAsync(p => p.Id == id && p.State != ItemState.Deleted);
 
@@ -53,7 +51,7 @@ namespace TeastEducationCenterUoW.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<BaseResponse<Student>>> Update(Guid id, [FromForm]StudentForCreationDto studentDto)
+        public async Task<ActionResult<BaseResponse<Student>>> Update(Guid id, [FromForm] StudentForCreationDto studentDto)
         {
             var result = await studentService.UpdateAsync(id, studentDto);
 

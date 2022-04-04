@@ -16,6 +16,6 @@ namespace TestEducationCenterUoW.WievModels.Students
 
         [Required]
         public Guid GroupId { get; set; }
-        
+
     }
 }
