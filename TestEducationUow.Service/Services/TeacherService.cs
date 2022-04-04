@@ -39,14 +39,6 @@ namespace TestEducationUow.Service.Services
         {
             var response = new BaseResponse<Teacher>();
 
-            // check for student
-            //var existStudent = await unitOfWork.Teachers.GetAsync(p => p.PhoneNumber == teachertDto.PhoneNumber);
-            //if (existStudent is not null)
-            //{
-            //    response.Error = new ErrorResponse(400, "User is exist");
-            //    return response;
-            //}
-
             // create after checking success
             var mappedTeacher = mapper.Map<Teacher>(teachertDto);
 

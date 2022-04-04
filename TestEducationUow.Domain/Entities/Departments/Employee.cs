@@ -20,5 +20,22 @@ namespace TestEducationUow.Domain.Entities.Departments
         public ItemState State { get; set; }
 
         public virtual ICollection<EmployeeSalary> EmployeeSalaries { get; set; }
+
+        public void Update()
+        {
+            UpdatedAt = DateTime.Now;
+            State = ItemState.Updated;
+        }
+
+        public void Create()
+        {
+            CreatedAt = DateTime.Now;
+            State = ItemState.Created;
+        }
+
+        public void Delete()
+        {
+            State = ItemState.Deleted;
+        }
     }
 }

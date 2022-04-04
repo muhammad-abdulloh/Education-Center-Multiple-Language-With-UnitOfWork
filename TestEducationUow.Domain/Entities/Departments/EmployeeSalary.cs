@@ -14,5 +14,22 @@ namespace TestEducationCenterUoW.Domain.Entities.Departments
         public DateTime? UpdatedAt { get; set; }
         public Guid? UpdatedBy { get; set; }
         public ItemState State { get; set; }
+
+        public void Update()
+        {
+            UpdatedAt = DateTime.Now;
+            State = ItemState.Updated;
+        }
+
+        public void Create()
+        {
+            CreatedAt = DateTime.Now;
+            State = ItemState.Created;
+        }
+
+        public void Delete()
+        {
+            State = ItemState.Deleted;
+        }
     }
 }
