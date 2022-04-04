@@ -14,7 +14,7 @@ namespace TestEducationUow.Service.Interfaces
 {
     public interface IEmployeeService
     {
-        Task<BaseResponse<Employee>> CreateAsync(EmployeeForCreationDto employeetDto);
+        Task<BaseResponse<Employee>> CreateAsync(EmployeeForCreationDto employeeDto);
         Task<BaseResponse<Employee>> GetAsync(Expression<Func<Employee, bool>> expression);
         Task<BaseResponse<IEnumerable<Employee>>> GetAllAsync(PaginationParams @params, Expression<Func<Employee, bool>> expression = null);
         Task<BaseResponse<bool>> DeleteAsync(Expression<Func<Employee, bool>> expression);

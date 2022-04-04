@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using TestEducationCenterUoW.Domain.Enums;
 
 namespace TestEducationUow.Service.DTOs.Departaments
 {
@@ -10,7 +11,7 @@ namespace TestEducationUow.Service.DTOs.Departaments
 
         [Required]
         public decimal Salary { get; set; }
-
-        public string PaymentType { get; set; }
+        
+        public PaymentType PaymentType { get; set; }
     }
 }
