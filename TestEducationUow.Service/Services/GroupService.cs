@@ -59,7 +59,7 @@ namespace TestEducationUow.Service.Services
             }
             existGroup.Delete();
 
-            var result = await unitOfWork.Groups.UpdateAsync(existGroup);
+            await unitOfWork.Groups.UpdateAsync(existGroup);
 
             await unitOfWork.SaveChangesAsync();
 

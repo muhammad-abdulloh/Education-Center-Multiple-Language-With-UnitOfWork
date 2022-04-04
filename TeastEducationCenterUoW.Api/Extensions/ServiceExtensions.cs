@@ -17,6 +17,8 @@ namespace TestEducationCenterUoW.Api.Extensions
             services.AddScoped<ICourseService, CourseService>();
             services.AddScoped<ITeacherService, TeacherService>();
             services.AddScoped<IEmployeeService, EmployeeService>();
+            services.AddScoped<IEmployeeSalaryService, EmployeeSalaryService>();
+            services.AddScoped<IGroupService, GroupService>();
         }
     }
 }

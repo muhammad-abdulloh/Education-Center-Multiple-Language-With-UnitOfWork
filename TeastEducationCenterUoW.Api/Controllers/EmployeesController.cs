@@ -18,12 +18,10 @@ namespace TeastEducationCenterUoW.Api.Controllers
     public class EmployeesController : ControllerBase
     {
         private readonly IEmployeeService employeeService;
-        private readonly IWebHostEnvironment env;
 
-        public EmployeesController(IEmployeeService employeeService, IWebHostEnvironment env)
+        public EmployeesController(IEmployeeService employeeService)
         {
             this.employeeService = employeeService;
-            this.env = env;
         }
 
         [HttpPost]
