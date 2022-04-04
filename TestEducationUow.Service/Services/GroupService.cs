@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 using TestEducationCenterUoW.Data.IRepositories;
 using TestEducationCenterUoW.Domain.Commons;
@@ -73,7 +71,7 @@ namespace TestEducationUow.Service.Services
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
             var response = new BaseResponse<IEnumerable<Group>>();
-            
+
             var groups = await unitOfWork.Groups.GetAllAsync(expression => expression.State != ItemState.Deleted);
 
             response.Data = groups.ToPagedList(@params);
@@ -89,7 +87,7 @@ namespace TestEducationUow.Service.Services
         public async Task<BaseResponse<Group>> GetAsync(Expression<Func<Group, bool>> expression)
         {
             var response = new BaseResponse<Group>();
-            
+
             var groups = await unitOfWork.Groups.GetAsync(expression);
             if (groups is null)
             {
@@ -118,7 +116,7 @@ namespace TestEducationUow.Service.Services
             group.Name = groupDto.Name;
             group.TeacherId = groupDto.TeacherId;
             group.CourseId = groupDto.CourseId;
-            
+
             group.Update();
 
             var result = await unitOfWork.Groups.UpdateAsync(group);

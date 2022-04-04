@@ -18,10 +18,14 @@ namespace TestEducationUow.Service.Mapping
         public MappingProfile()
         {
             CreateMap<StudentForCreationDto, Student>().ReverseMap();
+            
             CreateMap<CourseForCreationDto, Course>().ReverseMap();
+            
             CreateMap<TeacherForCreationDto, Teacher>().ReverseMap();
+
             CreateMap<EmployeeForCreationDto, Employee>().ReverseMap();
             CreateMap<EmployeeSalaryForCreationDto, EmployeeSalary>().ReverseMap();
+            
             CreateMap<GroupForCreationDto, Group>().ReverseMap();
         }
     }

@@ -11,7 +11,7 @@ namespace TestEducationUow.Service.DTOs.Departaments
 
         [Required]
         public decimal Salary { get; set; }
-        
+
         public PaymentType PaymentType { get; set; }
     }
 }

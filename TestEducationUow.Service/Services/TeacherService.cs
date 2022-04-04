@@ -99,7 +99,7 @@ namespace TestEducationUow.Service.Services
         public async Task<BaseResponse<Teacher>> GetAsync(Expression<Func<Teacher, bool>> expression)
         {
             var response = new BaseResponse<Teacher>();
-            
+
             var teacher = await unitOfWork.Teachers.GetAsync(expression);
             if (teacher is null)
             {
@@ -117,6 +117,7 @@ namespace TestEducationUow.Service.Services
             fileName = Guid.NewGuid().ToString("N") + "_" + fileName;
             string storagePath = config.GetSection("Storage:ImageUrl").Value;
             string filePath = Path.Combine(env.WebRootPath, $"{storagePath}/{fileName}");
+
             FileStream mainFile = File.Create(filePath);
             await file.CopyToAsync(mainFile);
             mainFile.Close();
@@ -127,7 +128,7 @@ namespace TestEducationUow.Service.Services
         public async Task<BaseResponse<Teacher>> UpdateAsync(Guid id, TeacherForCreationDto teachertDto)
         {
             var response = new BaseResponse<Teacher>();
-            
+
             // check for exist teacher
             var teacher = await unitOfWork.Teachers.GetAsync(p => p.Id == id && p.State != ItemState.Deleted);
             if (teacher is null)
@@ -136,14 +137,13 @@ namespace TestEducationUow.Service.Services
                 return response;
             }
 
-           
-
             teacher.FirstName = teachertDto.FirstName;
             teacher.LastName = teachertDto.LastName;
             teacher.Email = teachertDto.Email;
             teacher.PhoneNumber = teachertDto.PhoneNumber;
             string imagePath = await SaveFileAsync(teachertDto.Image.OpenReadStream(), teachertDto.Image.FileName);
             teacher.Image = "https://localhost:5001/Images/" + imagePath;
+
             teacher.Update();
 
             var result = await unitOfWork.Teachers.UpdateAsync(teacher);

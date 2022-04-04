@@ -4,9 +4,7 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 using TestEducationCenterUoW.Data.IRepositories;
 using TestEducationCenterUoW.Domain.Commons;
@@ -21,14 +19,12 @@ namespace TestEducationUow.Service.Services
 {
     public class EmployeeService : IEmployeeService
     {
-
-
         private readonly IUnitOfWork unitOfWork;
         private readonly IMapper mapper;
         private readonly IWebHostEnvironment env;
         private readonly IConfiguration config;
 
-        public  EmployeeService(IUnitOfWork unitOfWork, IMapper mapper, IWebHostEnvironment env, IConfiguration config)
+        public EmployeeService(IUnitOfWork unitOfWork, IMapper mapper, IWebHostEnvironment env, IConfiguration config)
         {
             this.unitOfWork = unitOfWork;
             this.mapper = mapper;
@@ -78,7 +74,7 @@ namespace TestEducationUow.Service.Services
         public async Task<BaseResponse<IEnumerable<Employee>>> GetAllAsync(PaginationParams @params, Expression<Func<Employee, bool>> expression = null)
         {
             string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            
+
             var response = new BaseResponse<IEnumerable<Employee>>();
 
             var employees = await unitOfWork.Employees.GetAllAsync(expression => expression.State != ItemState.Deleted);
@@ -96,7 +92,7 @@ namespace TestEducationUow.Service.Services
         public async Task<BaseResponse<Employee>> GetAsync(Expression<Func<Employee, bool>> expression)
         {
             var response = new BaseResponse<Employee>();
-            
+
             var employee = await unitOfWork.Employees.GetAsync(expression);
             if (employee is null)
             {
@@ -134,7 +130,7 @@ namespace TestEducationUow.Service.Services
             employee.Phone = employeeDto.Phone;
             employee.Position = employeeDto.Position;
             employee.Update();
-            
+
             var result = await unitOfWork.Employees.UpdateAsync(employee);
 
             await unitOfWork.SaveChangesAsync();

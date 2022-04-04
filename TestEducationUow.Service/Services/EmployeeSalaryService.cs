@@ -1,11 +1,7 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 using TestEducationCenterUoW.Data.IRepositories;
 using TestEducationCenterUoW.Domain.Commons;
@@ -118,7 +114,7 @@ namespace TestEducationUow.Service.Services
             employeeSalary.EmployeeId = employeeSalaryDto.EmployeeId;
             employeeSalary.Salary = employeeSalaryDto.Salary;
             employeeSalary.PaymentType = employeeSalaryDto.PaymentType;
-            
+
             employeeSalary.Update();
 
             var result = await unitOfWork.EmployeeSalaries.UpdateAsync(employeeSalary);
