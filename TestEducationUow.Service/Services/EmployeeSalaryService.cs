@@ -54,7 +54,7 @@ namespace TestEducationUow.Service.Services
             }
             existEmployeeSalary.Delete();
 
-            var result = await unitOfWork.EmployeeSalaries.UpdateAsync(existEmployeeSalary);
+            await unitOfWork.EmployeeSalaries.UpdateAsync(existEmployeeSalary);
 
             await unitOfWork.SaveChangesAsync();
 

@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-using Serilog;
+﻿using Serilog;
 using System;
 using System.Threading.Tasks;
 using TestEducationCenterUoW.Data.Contexts;
@@ -12,7 +11,6 @@ namespace TestEducationCenterUoW.Data.Repositories
     public class UnitOfWork : IUnitOfWork
     {
         private readonly EducationCenterDbContext context;
-        private readonly IConfiguration config;
         private readonly ILogger logger;
 
         /// <summary>
@@ -30,11 +28,9 @@ namespace TestEducationCenterUoW.Data.Repositories
 
         public IEmployeeSalaryRepository EmployeeSalaries { get; set; }
 
-        public UnitOfWork(EducationCenterDbContext context, IConfiguration config)
+        public UnitOfWork(EducationCenterDbContext context)
         {
             this.context = context;
-            this.config = config;
-
 
             // Object initializing for repositories
             Students = new StudentRepository(context, logger);

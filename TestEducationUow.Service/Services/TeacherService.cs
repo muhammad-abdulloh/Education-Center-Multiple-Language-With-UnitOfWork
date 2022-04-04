@@ -12,6 +12,7 @@ using TestEducationCenterUoW.Domain.Configurations;
 using TestEducationCenterUoW.Domain.Entities.Teachers;
 using TestEducationCenterUoW.Domain.Enums;
 using TestEducationCenterUoW.Service.Extensions;
+using TestEducationCenterUoW.Service.Helpers;
 using TestEducationUow.Service.DTOs.Teachers;
 using TestEducationUow.Service.Interfaces;
 
@@ -69,7 +70,7 @@ namespace TestEducationUow.Service.Services
             }
             existTeacher.Delete();
 
-            var result = await unitOfWork.Teachers.UpdateAsync(existTeacher);
+            await unitOfWork.Teachers.UpdateAsync(existTeacher);
 
             await unitOfWork.SaveChangesAsync();
 
@@ -112,6 +113,9 @@ namespace TestEducationUow.Service.Services
             return response;
         }
 
+
+
+
         public async Task<string> SaveFileAsync(Stream file, string fileName)
         {
             fileName = Guid.NewGuid().ToString("N") + "_" + fileName;
@@ -124,6 +128,29 @@ namespace TestEducationUow.Service.Services
 
             return fileName;
         }
+
+        public static async Task<string> SaveFileAsync(this Stream file, string fileName, IWebHostEnvironment env, IConfiguration config)
+        {
+            string hostUrl = HttpContextHelper.Context?.Request?.Scheme + "://" + HttpContextHelper.Context?.Request?.Host.Value;
+
+
+            fileName = Guid.NewGuid().ToString("N") + "_" + fileName;
+
+            string storagePath = config.GetSection("Storage:ImageUrl").Value;
+            string filePath = Path.Combine(env.WebRootPath, $"{storagePath}/{fileName}");
+            FileStream mainFile = File.Create(filePath);
+
+            string webUrl = $@"{hostUrl}/{storagePath}/{fileName}";
+
+
+            await file.CopyToAsync(mainFile);
+            mainFile.Close();
+
+            return webUrl;
+        }
+
+
+
 
         public async Task<BaseResponse<Teacher>> UpdateAsync(Guid id, TeacherForCreationDto teachertDto)
         {
@@ -141,6 +168,7 @@ namespace TestEducationUow.Service.Services
             teacher.LastName = teachertDto.LastName;
             teacher.Email = teachertDto.Email;
             teacher.PhoneNumber = teachertDto.PhoneNumber;
+
             string imagePath = await SaveFileAsync(teachertDto.Image.OpenReadStream(), teachertDto.Image.FileName);
             teacher.Image = "https://localhost:5001/Images/" + imagePath;
 

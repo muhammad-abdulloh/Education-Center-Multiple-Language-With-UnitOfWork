@@ -81,7 +81,7 @@ namespace TestEducationCenterUoW.Service.Services
             }
             existStudent.Delete();
 
-            var result = await unitOfWork.Students.UpdateAsync(existStudent);
+            await unitOfWork.Students.UpdateAsync(existStudent);
 
             await unitOfWork.SaveChangesAsync();
 

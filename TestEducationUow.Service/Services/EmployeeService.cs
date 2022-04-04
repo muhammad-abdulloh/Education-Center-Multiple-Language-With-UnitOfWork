@@ -21,8 +21,6 @@ namespace TestEducationUow.Service.Services
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IMapper mapper;
-        private readonly IWebHostEnvironment env;
-        private readonly IConfiguration config;
 
         public EmployeeService(IUnitOfWork unitOfWork, IMapper mapper, IWebHostEnvironment env, IConfiguration config)
         {
@@ -62,7 +60,7 @@ namespace TestEducationUow.Service.Services
             }
             existEmployee.Delete();
 
-            var result = await unitOfWork.Employees.UpdateAsync(existEmployee);
+            await unitOfWork.Employees.UpdateAsync(existEmployee);
 
             await unitOfWork.SaveChangesAsync();
 
