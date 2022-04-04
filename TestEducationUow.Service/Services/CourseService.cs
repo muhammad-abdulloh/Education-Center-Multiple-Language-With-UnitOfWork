@@ -38,15 +38,6 @@ namespace TestEducationUow.Service.Services
         {
             var response = new BaseResponse<Course>();
 
-            /*// check for course
-            var existCourse = await unitOfWork.Courses.GetAsync(p => p.Name == courseDto.Name);
-            if (existCourse is not null)
-            {
-                response.Error = new ErrorResponse(400, "User is exist");
-                return response;
-            }*/
-
-
             // create after checking success
             var mappedCourse = mapper.Map<Course>(courseDto);
 
