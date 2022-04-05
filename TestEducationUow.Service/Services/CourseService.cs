@@ -46,7 +46,7 @@ namespace TestEducationUow.Service.Services
 
             var result = await unitOfWork.Courses.CreateAsync(mappedCourse);
 
-            result.CourseImageUrl = config.GetSection("FileUrl:ImageUrl").Value +  result.CourseImageUrl;
+            result.CourseImageUrl = config.GetSection("FileUrl:ImageUrl").Value + result.CourseImageUrl;
 
             await unitOfWork.SaveChangesAsync();
 
@@ -116,7 +116,7 @@ namespace TestEducationUow.Service.Services
             fileName = Guid.NewGuid().ToString("N") + "_" + fileName;
             string storagePath = config.GetSection("Storage:ImageUrl").Value;
             string filePath = Path.Combine(env.WebRootPath, $"{storagePath}/{fileName}");
-            
+
             FileStream mainFile = File.Create(filePath);
             await file.CopyToAsync(mainFile);
             mainFile.Close();

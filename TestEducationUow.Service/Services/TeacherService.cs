@@ -12,7 +12,6 @@ using TestEducationCenterUoW.Domain.Configurations;
 using TestEducationCenterUoW.Domain.Entities.Teachers;
 using TestEducationCenterUoW.Domain.Enums;
 using TestEducationCenterUoW.Service.Extensions;
-using TestEducationCenterUoW.Service.Helpers;
 using TestEducationUow.Service.DTOs.Teachers;
 using TestEducationUow.Service.Interfaces;
 
