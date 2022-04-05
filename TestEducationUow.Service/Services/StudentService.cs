@@ -59,7 +59,7 @@ namespace TestEducationCenterUoW.Service.Services
 
             var result = await unitOfWork.Students.CreateAsync(mappedStudent);
 
-            result.Image = "https://localhost:5001/Images/" + result.Image;
+            result.Image = config.GetSection("FileUrl:ImageUrl").Value + result.Image;
 
             await unitOfWork.SaveChangesAsync();
 
@@ -164,7 +164,7 @@ namespace TestEducationCenterUoW.Service.Services
             student.Phone = studentDto.Phone;
             student.GroupId = studentDto.GroupId;
             string imagePath = await SaveFileAsync(studentDto.Image.OpenReadStream(), studentDto.Image.FileName);
-            student.Image = "https://localhost:5001/Images/" + imagePath;
+            student.Image = config.GetSection("FileUrl:ImageUrl").Value + imagePath;
             student.Update();
 
             var result = await unitOfWork.Students.UpdateAsync(student);

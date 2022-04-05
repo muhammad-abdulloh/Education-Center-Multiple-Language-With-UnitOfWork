@@ -46,7 +46,7 @@ namespace TestEducationUow.Service.Services
 
             var result = await unitOfWork.Courses.CreateAsync(mappedCourse);
 
-            result.CourseImageUrl = "https://localhost:5001/Images/" + result.CourseImageUrl;
+            result.CourseImageUrl = config.GetSection("FileUrl:ImageUrl").Value +  result.CourseImageUrl;
 
             await unitOfWork.SaveChangesAsync();
 
@@ -116,6 +116,7 @@ namespace TestEducationUow.Service.Services
             fileName = Guid.NewGuid().ToString("N") + "_" + fileName;
             string storagePath = config.GetSection("Storage:ImageUrl").Value;
             string filePath = Path.Combine(env.WebRootPath, $"{storagePath}/{fileName}");
+            
             FileStream mainFile = File.Create(filePath);
             await file.CopyToAsync(mainFile);
             mainFile.Close();
@@ -143,7 +144,7 @@ namespace TestEducationUow.Service.Services
             course.CourseAuthor = courseDto.CourseAuthor;
             course.CourseDescription = courseDto.CourseDescription;
             string imagePath = await SaveFileAsync(courseDto.CourseImageUrl.OpenReadStream(), courseDto.CourseImageUrl.FileName);
-            course.CourseImageUrl = "https://localhost:5001/Images/" + imagePath;
+            course.CourseImageUrl = config.GetSection("FileUrl:ImageUrl").Value + imagePath;
             course.Star = courseDto.Star;
             course.Update();
 

@@ -48,7 +48,7 @@ namespace TestEducationUow.Service.Services
 
             var result = await unitOfWork.Teachers.CreateAsync(mappedTeacher);
 
-            result.Image = "https://localhost:5001/Images/" + result.Image;
+            result.Image = config.GetSection("FileUrl:ImageUrl").Value + result.Image;
 
             await unitOfWork.SaveChangesAsync();
 
@@ -129,29 +129,6 @@ namespace TestEducationUow.Service.Services
             return fileName;
         }
 
-        public static async Task<string> SaveFileAsync(this Stream file, string fileName, IWebHostEnvironment env, IConfiguration config)
-        {
-            string hostUrl = HttpContextHelper.Context?.Request?.Scheme + "://" + HttpContextHelper.Context?.Request?.Host.Value;
-
-
-            fileName = Guid.NewGuid().ToString("N") + "_" + fileName;
-
-            string storagePath = config.GetSection("Storage:ImageUrl").Value;
-            string filePath = Path.Combine(env.WebRootPath, $"{storagePath}/{fileName}");
-            FileStream mainFile = File.Create(filePath);
-
-            string webUrl = $@"{hostUrl}/{storagePath}/{fileName}";
-
-
-            await file.CopyToAsync(mainFile);
-            mainFile.Close();
-
-            return webUrl;
-        }
-
-
-
-
         public async Task<BaseResponse<Teacher>> UpdateAsync(Guid id, TeacherForCreationDto teachertDto)
         {
             var response = new BaseResponse<Teacher>();
@@ -170,7 +147,7 @@ namespace TestEducationUow.Service.Services
             teacher.PhoneNumber = teachertDto.PhoneNumber;
 
             string imagePath = await SaveFileAsync(teachertDto.Image.OpenReadStream(), teachertDto.Image.FileName);
-            teacher.Image = "https://localhost:5001/Images/" + imagePath;
+            teacher.Image = config.GetSection("FileUrl:ImageUrl").Value + imagePath;
 
             teacher.Update();
 

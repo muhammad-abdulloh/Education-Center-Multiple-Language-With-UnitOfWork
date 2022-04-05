@@ -21,6 +21,8 @@ namespace TestEducationUow.Service.Services
     {
         private readonly IUnitOfWork unitOfWork;
         private readonly IMapper mapper;
+        private readonly IConfiguration config;
+        private readonly IWebHostEnvironment env;
 
         public EmployeeService(IUnitOfWork unitOfWork, IMapper mapper, IWebHostEnvironment env, IConfiguration config)
         {
@@ -119,8 +121,6 @@ namespace TestEducationUow.Service.Services
                 response.Error = new ErrorResponse(404, "User not found");
                 return response;
             }
-
-
 
             employee.FirstName = employeeDto.FirstName;
             employee.LastName = employeeDto.LastName;
