@@ -23,7 +23,7 @@ namespace TeastEducationCenterUoW.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<BaseResponse<Group>>> Create([FromForm] GroupForCreationDto grouptDto)
+        public async Task<ActionResult<BaseResponse<Group>>> Create(GroupForCreationDto grouptDto)
         {
             var result = await groupService.CreateAsync(grouptDto);
 
