@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -17,12 +16,10 @@ namespace TeastEducationCenterUoW.Api.Controllers
     public class CoursesController : ControllerBase
     {
         private readonly ICourseService courseService;
-        private readonly IWebHostEnvironment env;
 
-        public CoursesController(ICourseService courseService, IWebHostEnvironment env)
+        public CoursesController(ICourseService courseService)
         {
             this.courseService = courseService;
-            this.env = env;
         }
 
         [HttpPost]

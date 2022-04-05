@@ -23,7 +23,7 @@ namespace TeastEducationCenterUoW.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<BaseResponse<EmployeeSalary>>> Create([FromForm] EmployeeSalaryForCreationDto employeeDto)
+        public async Task<ActionResult<BaseResponse<EmployeeSalary>>> Create(EmployeeSalaryForCreationDto employeeDto)
         {
             var result = await employeeSalaryService.CreateAsync(employeeDto);
 

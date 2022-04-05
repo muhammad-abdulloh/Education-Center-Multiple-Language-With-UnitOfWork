@@ -68,7 +68,7 @@ namespace TestEducationUow.Service.Services
             }
             existCourse.Delete();
 
-            var result = await unitOfWork.Courses.UpdateAsync(existCourse);
+            await unitOfWork.Courses.UpdateAsync(existCourse);
 
             await unitOfWork.SaveChangesAsync();
 
