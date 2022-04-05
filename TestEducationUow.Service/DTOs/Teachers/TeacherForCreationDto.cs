@@ -7,6 +7,7 @@ namespace TestEducationUow.Service.DTOs.Teachers
     {
         [Required]
         public string FirstName { get; set; }
+
         [Required]
         public string LastName { get; set; }
 
@@ -14,6 +15,7 @@ namespace TestEducationUow.Service.DTOs.Teachers
 
         [Required]
         public string PhoneNumber { get; set; }
+
         public IFormFile Image { get; set; }
     }
 }
