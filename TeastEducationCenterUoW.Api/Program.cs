@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using Serilog;
+using Serilog.Events;
 using System;
 
 namespace TeastEducationCenterUoW.Api
@@ -15,7 +16,7 @@ namespace TeastEducationCenterUoW.Api
                     outputTemplate: "{Timestamp: yyyy-MM-dd HH:mm:ss } " +
                     "[{Level:u3}] {Message} {NewLine} {Exception}",
                     rollingInterval: RollingInterval.Day,
-                    restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information
+                    restrictedToMinimumLevel: LogEventLevel.Information
                 ).CreateLogger();
             try
             {

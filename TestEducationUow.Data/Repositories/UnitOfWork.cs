@@ -6,6 +6,7 @@ using TestEducationCenterUoW.Data.IRepositories;
 using TestEducationUow.Data.IRepositories;
 using TestEducationUow.Data.Repositories;
 
+#pragma warning disable
 namespace TestEducationCenterUoW.Data.Repositories
 {
     public class UnitOfWork : IUnitOfWork
