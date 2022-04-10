@@ -80,8 +80,6 @@ namespace TestEducationUow.Service.Services
 
         public async Task<BaseResponse<IEnumerable<Course>>> GetAllAsync(PaginationParams @params, Expression<Func<Course, bool>> expression = null)
         {
-            string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-
             var response = new BaseResponse<IEnumerable<Course>>();
 
             var courses = await unitOfWork.Courses.GetAllAsync(expression => expression.State != ItemState.Deleted);
