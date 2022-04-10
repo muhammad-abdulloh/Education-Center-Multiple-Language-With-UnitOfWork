@@ -1,9 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-using System;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TestEducationUow.Data.Migrations
 {
-    public partial class COnnectDatabase : Migration
+    public partial class MultipleLanguageGroups : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -34,6 +34,9 @@ namespace TestEducationUow.Data.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     FirstName = table.Column<string>(type: "text", nullable: true),
                     LastName = table.Column<string>(type: "text", nullable: true),
+                    Email = table.Column<string>(type: "text", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "text", nullable: true),
+                    Image = table.Column<string>(type: "text", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     UpdatedBy = table.Column<Guid>(type: "uuid", nullable: true),
@@ -45,7 +48,7 @@ namespace TestEducationUow.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "EmployeeSalary",
+                name: "EmployeeSalaries",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -59,9 +62,9 @@ namespace TestEducationUow.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EmployeeSalary", x => x.Id);
+                    table.PrimaryKey("PK_EmployeeSalaries", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_EmployeeSalary_Employees_EmployeeId",
+                        name: "FK_EmployeeSalaries_Employees_EmployeeId",
                         column: x => x.EmployeeId,
                         principalTable: "Employees",
                         principalColumn: "Id",
@@ -78,6 +81,13 @@ namespace TestEducationUow.Data.Migrations
                     NameEn = table.Column<string>(type: "text", nullable: true),
                     Price = table.Column<decimal>(type: "numeric", nullable: false),
                     Duration = table.Column<int>(type: "integer", nullable: false),
+                    CourseForId = table.Column<string>(type: "text", nullable: true),
+                    CourseType = table.Column<string>(type: "text", nullable: true),
+                    CourseAuthor = table.Column<string>(type: "text", nullable: true),
+                    CourseImageUrl = table.Column<string>(type: "text", nullable: true),
+                    CourseDescription = table.Column<string>(type: "text", nullable: true),
+                    ViewCount = table.Column<int>(type: "integer", nullable: false),
+                    StarCount = table.Column<int>(type: "integer", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     UpdatedBy = table.Column<Guid>(type: "uuid", nullable: true),
@@ -103,8 +113,8 @@ namespace TestEducationUow.Data.Migrations
                     NameUz = table.Column<string>(type: "text", nullable: true),
                     NameRu = table.Column<string>(type: "text", nullable: true),
                     NameEn = table.Column<string>(type: "text", nullable: true),
-                    TeacherId = table.Column<Guid>(type: "uuid", nullable: false),
-                    CourseId = table.Column<Guid>(type: "uuid", nullable: false),
+                    TeacherId = table.Column<Guid>(type: "uuid", nullable: true),
+                    CourseId = table.Column<Guid>(type: "uuid", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     UpdatedBy = table.Column<Guid>(type: "uuid", nullable: true),
@@ -118,13 +128,13 @@ namespace TestEducationUow.Data.Migrations
                         column: x => x.CourseId,
                         principalTable: "Courses",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Groups_Teachers_TeacherId",
                         column: x => x.TeacherId,
                         principalTable: "Teachers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -135,11 +145,12 @@ namespace TestEducationUow.Data.Migrations
                     FirstName = table.Column<string>(type: "text", nullable: true),
                     LastName = table.Column<string>(type: "text", nullable: true),
                     Phone = table.Column<string>(type: "text", nullable: true),
-                    GroupId = table.Column<Guid>(type: "uuid", nullable: false),
+                    GroupId = table.Column<Guid>(type: "uuid", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     UpdatedBy = table.Column<Guid>(type: "uuid", nullable: true),
-                    State = table.Column<int>(type: "integer", nullable: false)
+                    State = table.Column<int>(type: "integer", nullable: false),
+                    Image = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -149,7 +160,7 @@ namespace TestEducationUow.Data.Migrations
                         column: x => x.GroupId,
                         principalTable: "Groups",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -158,8 +169,8 @@ namespace TestEducationUow.Data.Migrations
                 column: "TeacherId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EmployeeSalary_EmployeeId",
-                table: "EmployeeSalary",
+                name: "IX_EmployeeSalaries_EmployeeId",
+                table: "EmployeeSalaries",
                 column: "EmployeeId");
 
             migrationBuilder.CreateIndex(
@@ -181,7 +192,7 @@ namespace TestEducationUow.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "EmployeeSalary");
+                name: "EmployeeSalaries");
 
             migrationBuilder.DropTable(
                 name: "Students");

@@ -30,15 +30,24 @@ namespace TestEducationUow.Service.Services
         {
             var response = new BaseResponse<Group>();
 
-            // create after checking success
-            var mappedGroup = mapper.Map<Group>(groupDto);
+            var teacher = await unitOfWork.Teachers.GetAsync(p => p.Id == groupDto.TeacherId);
+            if (teacher is null)
+            {
+                response.Error = new ErrorResponse(404, "Teacher not found");
+                return response;
+            }
 
-            // save image from dto model to wwwroot
+            var course = await unitOfWork.Courses.GetAsync(p => p.Id == groupDto.CourseId);
+            if (course is null)
+            {
+                response.Error = new ErrorResponse(404, "Course not found");
+                return response;
+            }
 
-            var result = await unitOfWork.Groups.CreateAsync(mappedGroup);
+            var group = mapper.Map<Group>(groupDto);
+            var result = await unitOfWork.Groups.CreateAsync(group);
 
             await unitOfWork.SaveChangesAsync();
-
             response.Data = result;
 
             return response;
@@ -52,7 +61,7 @@ namespace TestEducationUow.Service.Services
             var existGroup = await unitOfWork.Groups.GetAsync(expression);
             if (existGroup is null)
             {
-                response.Error = new ErrorResponse(404, "User not found");
+                response.Error = new ErrorResponse(404, "Group not found");
                 return response;
             }
             existGroup.Delete();
@@ -68,7 +77,6 @@ namespace TestEducationUow.Service.Services
 
         public async Task<BaseResponse<IEnumerable<Group>>> GetAllAsync(PaginationParams @params, Expression<Func<Group, bool>> expression = null)
         {
-            string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
             var response = new BaseResponse<IEnumerable<Group>>();
 
@@ -91,7 +99,7 @@ namespace TestEducationUow.Service.Services
             var groups = await unitOfWork.Groups.GetAsync(expression);
             if (groups is null)
             {
-                response.Error = new ErrorResponse(404, "User not found");
+                response.Error = new ErrorResponse(404, "Group not found");
                 return response;
             }
 
@@ -108,12 +116,14 @@ namespace TestEducationUow.Service.Services
             var group = await unitOfWork.Groups.GetAsync(p => p.Id == id && p.State != ItemState.Deleted);
             if (group is null)
             {
-                response.Error = new ErrorResponse(404, "User not found");
+                response.Error = new ErrorResponse(404, "Group not found");
                 return response;
             }
 
 
-            group.Name = groupDto.Name;
+            group.NameUz = groupDto.NameUz;
+            group.NameRu = groupDto.NameRu;
+            group.NameEn = groupDto.NameEn;
             group.TeacherId = groupDto.TeacherId;
             group.CourseId = groupDto.CourseId;
 

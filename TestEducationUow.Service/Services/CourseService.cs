@@ -63,7 +63,7 @@ namespace TestEducationUow.Service.Services
             var existCourse = await unitOfWork.Courses.GetAsync(expression);
             if (existCourse is null)
             {
-                response.Error = new ErrorResponse(404, "User not found");
+                response.Error = new ErrorResponse(404, "Course not found");
                 return response;
             }
             existCourse.Delete();
@@ -89,7 +89,7 @@ namespace TestEducationUow.Service.Services
 
             if (response.Data is null)
             {
-                response.Error = new ErrorResponse(404, "Users not found");
+                response.Error = new ErrorResponse(404, "Course not found");
             }
 
             return response;
@@ -102,7 +102,7 @@ namespace TestEducationUow.Service.Services
             var courses = await unitOfWork.Courses.GetAsync(expression);
             if (courses is null)
             {
-                response.Error = new ErrorResponse(404, "User not found");
+                response.Error = new ErrorResponse(404, "Course not found");
                 return response;
             }
 
@@ -131,12 +131,14 @@ namespace TestEducationUow.Service.Services
             var course = await unitOfWork.Courses.GetAsync(p => p.Id == id && p.State != ItemState.Deleted);
             if (course is null)
             {
-                response.Error = new ErrorResponse(404, "User not found");
+                response.Error = new ErrorResponse(404, "Course not found");
                 return response;
             }
 
 
-            course.Name = courseDto.Name;
+            course.NameUz = courseDto.NameUz;
+            course.NameRu = courseDto.NameRu;
+            course.NameEn = courseDto.NameEn;
             course.Price = courseDto.Price;
             course.Duration = courseDto.Duration;
             course.CourseForId = courseDto.CourseForId;

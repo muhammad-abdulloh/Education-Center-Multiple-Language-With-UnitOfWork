@@ -10,8 +10,8 @@ using TestEducationCenterUoW.Data.Contexts;
 namespace TestEducationUow.Data.Migrations
 {
     [DbContext(typeof(EducationCenterDbContext))]
-    [Migration("20220331091712_ConnectDatabase3")]
-    partial class ConnectDatabase3
+    [Migration("20220410075650_MultipleLanguageGroups")]
+    partial class MultipleLanguageGroups
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,6 +26,21 @@ namespace TestEducationUow.Data.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
+
+                    b.Property<string>("CourseAuthor")
+                        .HasColumnType("text");
+
+                    b.Property<string>("CourseDescription")
+                        .HasColumnType("text");
+
+                    b.Property<string>("CourseForId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("CourseImageUrl")
+                        .HasColumnType("text");
+
+                    b.Property<string>("CourseType")
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp without time zone");
@@ -45,6 +60,9 @@ namespace TestEducationUow.Data.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("numeric");
 
+                    b.Property<int>("StarCount")
+                        .HasColumnType("integer");
+
                     b.Property<int>("State")
                         .HasColumnType("integer");
 
@@ -56,6 +74,9 @@ namespace TestEducationUow.Data.Migrations
 
                     b.Property<Guid?>("UpdatedBy")
                         .HasColumnType("uuid");
+
+                    b.Property<int>("ViewCount")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -95,7 +116,7 @@ namespace TestEducationUow.Data.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("EmployeeSalary");
+                    b.ToTable("EmployeeSalaries");
                 });
 
             modelBuilder.Entity("TestEducationCenterUoW.Domain.Entities.Groups.Group", b =>
@@ -104,7 +125,7 @@ namespace TestEducationUow.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("CourseId")
+                    b.Property<Guid?>("CourseId")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAt")
@@ -122,7 +143,7 @@ namespace TestEducationUow.Data.Migrations
                     b.Property<int>("State")
                         .HasColumnType("integer");
 
-                    b.Property<Guid>("TeacherId")
+                    b.Property<Guid?>("TeacherId")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime?>("UpdatedAt")
@@ -152,8 +173,11 @@ namespace TestEducationUow.Data.Migrations
                     b.Property<string>("FirstName")
                         .HasColumnType("text");
 
-                    b.Property<Guid>("GroupId")
+                    b.Property<Guid?>("GroupId")
                         .HasColumnType("uuid");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("text");
 
                     b.Property<string>("LastName")
                         .HasColumnType("text");
@@ -186,10 +210,19 @@ namespace TestEducationUow.Data.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp without time zone");
 
+                    b.Property<string>("Email")
+                        .HasColumnType("text");
+
                     b.Property<string>("FirstName")
                         .HasColumnType("text");
 
+                    b.Property<string>("Image")
+                        .HasColumnType("text");
+
                     b.Property<string>("LastName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("PhoneNumber")
                         .HasColumnType("text");
 
                     b.Property<int>("State")
@@ -262,15 +295,11 @@ namespace TestEducationUow.Data.Migrations
                 {
                     b.HasOne("TestEducationCenterUoW.Domain.Entities.Courses.Course", "Course")
                         .WithMany()
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CourseId");
 
                     b.HasOne("TestEducationCenterUoW.Domain.Entities.Teachers.Teacher", "Teacher")
                         .WithMany()
-                        .HasForeignKey("TeacherId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TeacherId");
 
                     b.Navigation("Course");
 
@@ -281,9 +310,7 @@ namespace TestEducationUow.Data.Migrations
                 {
                     b.HasOne("TestEducationCenterUoW.Domain.Entities.Groups.Group", null)
                         .WithMany("Students")
-                        .HasForeignKey("GroupId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("GroupId");
                 });
 
             modelBuilder.Entity("TestEducationCenterUoW.Domain.Entities.Groups.Group", b =>
