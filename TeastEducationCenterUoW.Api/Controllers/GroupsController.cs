@@ -23,7 +23,7 @@ namespace TeastEducationCenterUoW.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<BaseResponse<Group>>> Create(GroupForCreationDto grouptDto)
+        public async Task<IActionResult> Create(GroupForCreationDto grouptDto)
         {
             var result = await groupService.CreateAsync(grouptDto);
 
@@ -32,7 +32,7 @@ namespace TeastEducationCenterUoW.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<BaseResponse<IEnumerable<Group>>>> GetAll([FromQuery] PaginationParams @params)
+        public async Task<IActionResult> GetAll([FromQuery] PaginationParams @params)
         {
             var result = await groupService.GetAllAsync(@params);
 
@@ -40,7 +40,7 @@ namespace TeastEducationCenterUoW.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<BaseResponse<Group>>> Get([FromRoute] Guid id)
+        public async Task<IActionResult> Get([FromRoute] Guid id)
         {
             var result = await groupService.GetAsync(p => p.Id == id && p.State != ItemState.Deleted);
 
@@ -48,7 +48,7 @@ namespace TeastEducationCenterUoW.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<BaseResponse<Group>>> Update(Guid id, [FromForm] GroupForCreationDto groupDto)
+        public async Task<IActionResult> Update(Guid id, [FromForm] GroupForCreationDto groupDto)
         {
             var result = await groupService.UpdateAsync(id, groupDto);
 

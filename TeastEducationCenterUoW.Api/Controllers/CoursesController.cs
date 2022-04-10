@@ -23,7 +23,7 @@ namespace TeastEducationCenterUoW.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<BaseResponse<Course>>> Create([FromForm] CourseForCreationDto coursetDto)
+        public async Task<IActionResult> Create([FromForm] CourseForCreationDto coursetDto)
         {
             var result = await courseService.CreateAsync(coursetDto);
 
@@ -32,7 +32,7 @@ namespace TeastEducationCenterUoW.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<BaseResponse<IEnumerable<Course>>>> GetAll([FromQuery] PaginationParams @params)
+        public async Task<IActionResult> GetAll([FromQuery] PaginationParams @params)
         {
             var result = await courseService.GetAllAsync(@params);
 
@@ -40,7 +40,7 @@ namespace TeastEducationCenterUoW.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<BaseResponse<Course>>> Get([FromRoute] Guid id)
+        public async Task<IActionResult> Get([FromRoute] Guid id)
         {
             var result = await courseService.GetAsync(p => p.Id == id && p.State != ItemState.Deleted);
 
@@ -48,7 +48,7 @@ namespace TeastEducationCenterUoW.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<BaseResponse<Course>>> Update(Guid id, [FromForm] CourseForCreationDto coursetDto)
+        public async Task<IActionResult> Update(Guid id, [FromForm] CourseForCreationDto coursetDto)
         {
             var result = await courseService.UpdateAsync(id, coursetDto);
 
