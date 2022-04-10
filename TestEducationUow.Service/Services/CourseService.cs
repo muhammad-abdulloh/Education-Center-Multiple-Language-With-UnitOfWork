@@ -12,6 +12,7 @@ using TestEducationCenterUoW.Domain.Configurations;
 using TestEducationCenterUoW.Domain.Entities.Courses;
 using TestEducationCenterUoW.Domain.Enums;
 using TestEducationCenterUoW.Service.Extensions;
+using TestEducationCenterUoW.Service.Helpers;
 using TestEducationUow.Service.DTOs.Courses;
 using TestEducationUow.Service.Interfaces;
 
@@ -105,6 +106,10 @@ namespace TestEducationUow.Service.Services
                 response.Error = new ErrorResponse(404, "Course not found");
                 return response;
             }
+
+            // Language init
+            string lang = HttpContextHelper.Language;
+            courses.Name = lang == "en" ? courses.NameEn : lang == "ru" ? courses.NameRu : courses.NameUz;
 
             response.Data = courses;
 
