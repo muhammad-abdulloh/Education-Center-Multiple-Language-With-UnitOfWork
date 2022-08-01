@@ -129,7 +129,7 @@ namespace TestEducationUow.Service.Services
 
             //string storagePath = Path.Combine(env.WebRootPath, "Images/"+ DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss"));
 
-            string storagePath = Path.Combine(env.WebRootPath, "Images/" + "/" + DateTimeOffset.Now.Year + "/" + DateTimeOffset.Now.Month);
+            string storagePath = Path.Combine(env.WebRootPath, "Images/" + DateTimeOffset.Now.Year + "/" + DateTimeOffset.Now.Month);
 
             //string storagePath = "Images" + "/" + DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss");
             if (!Directory.Exists(storagePath))
