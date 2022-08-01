@@ -18,6 +18,6 @@ namespace TestEducationUow.Service.DTOs.Courses
         public IFormFile CourseImageUrl { get; set; }
         public string CourseDescription { get; set; }
         public int Star { get; set; }
-        
+
     }
 }

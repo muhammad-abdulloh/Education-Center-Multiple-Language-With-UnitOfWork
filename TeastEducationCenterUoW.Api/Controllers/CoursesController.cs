@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using TestEducationCenterUoW.Domain.Commons;
 using TestEducationCenterUoW.Domain.Configurations;
-using TestEducationCenterUoW.Domain.Entities.Courses;
 using TestEducationCenterUoW.Domain.Enums;
 using TestEducationUow.Service.DTOs.Courses;
 using TestEducationUow.Service.Interfaces;

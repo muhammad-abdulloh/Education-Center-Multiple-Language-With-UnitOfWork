@@ -20,6 +20,6 @@ namespace TestEducationUow.Service.DTOs.Groups
 
         [Required]
         public Guid? CourseId { get; set; }
-        
+
     }
 }

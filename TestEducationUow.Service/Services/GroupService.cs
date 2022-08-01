@@ -96,7 +96,7 @@ namespace TestEducationUow.Service.Services
         public async Task<BaseResponse<Group>> GetAsync(Expression<Func<Group, bool>> expression)
         {
             var response = new BaseResponse<Group>();
-            
+
             var groups = await unitOfWork.Groups.GetAsync(expression);
             if (groups is null)
             {
@@ -108,7 +108,7 @@ namespace TestEducationUow.Service.Services
             string lang = HttpContextHelper.Language;
             groups.Name = lang == "en" ? groups.NameEn : lang == "ru" ? groups.NameRu : groups.NameUz;
             response.Data = groups;
-            
+
             return response;
         }
 

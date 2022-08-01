@@ -27,7 +27,7 @@ namespace TeastEducationCenterUoW.Api
         {
             services.AddDbContext<EducationCenterDbContext>(options =>
             {
-                options.UseNpgsql(Configuration.GetConnectionString("TestEducationCenter"));
+                options.UseSqlServer(Configuration.GetConnectionString("TestEducationCenter"));
             });
             services.AddControllers().AddNewtonsoftJson();
 

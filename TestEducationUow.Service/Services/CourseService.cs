@@ -114,11 +114,30 @@ namespace TestEducationUow.Service.Services
             return response;
         }
 
+        /// <summary>
+        /// save fali url with create
+        /// </summary>
+        /// <param name="file"></param>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
         public async Task<string> SaveFileAsync(Stream file, string fileName)
         {
             fileName = Guid.NewGuid().ToString("N") + "_" + fileName;
-            string storagePath = config.GetSection("Storage:ImageUrl").Value;
-            string filePath = Path.Combine(env.WebRootPath, $"{storagePath}/{fileName}");
+            //string storagePath = config.GetSection("Storage:ImageUrl").Value;
+            //string storagePath = "Images/" + DateTime.Now.ToString();
+            //string storagePath = "Images" + "/" + DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss").Replace(" ", "_").Replace(".", "_").Replace(":", "_");
+
+            //string storagePath = Path.Combine(env.WebRootPath, "Images/"+ DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss"));
+
+            string storagePath = Path.Combine(env.WebRootPath, "Images/" + "/" + DateTimeOffset.Now.Year + "/" + DateTimeOffset.Now.Month);
+
+            //string storagePath = "Images" + "/" + DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss");
+            if (!Directory.Exists(storagePath))
+            {
+                Directory.CreateDirectory(storagePath);
+            }
+
+            string filePath = $"{storagePath}/{fileName}";
 
             FileStream mainFile = File.Create(filePath);
             await file.CopyToAsync(mainFile);
