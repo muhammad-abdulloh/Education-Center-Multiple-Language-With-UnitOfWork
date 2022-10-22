@@ -8,6 +8,9 @@ using TestEducationUow.Service.Services;
 
 namespace TestEducationCenterUoW.Api.Extensions
 {
+    ///
+    /// summary commit
+    ///
     public static class ServiceExtensions
     {
         public static void AddCustomServices(this IServiceCollection services)
